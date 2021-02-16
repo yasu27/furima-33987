@@ -47,7 +47,7 @@ has_one :order
 | address           | string     | NOT NULL          |
 | building_name     | string     |                   |
 | phone_number      | string     | NOT NULL          |
-| user              | references | foreign_key: true |
+| order             | references | foreign_key: true |
 
 ### Association
 belongs_to :order
