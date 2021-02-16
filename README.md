@@ -26,8 +26,8 @@ has_many :orders
 | category_id    | integer    | NOT NULL          |
 | condition_id   | integer    | NOT NULL          |
 | delivery_id    | integer    | NOT NULL          |
-| prefectures_id | integer    | NOT NULL          |
-| days_id        | integer    | NOT NULL          |
+| prefecture_id  | integer    | NOT NULL          |
+| day_id         | integer    | NOT NULL          |
 | price          | integer    | NOT NULL          |
 | user           | references | foreign_key: true |
 
@@ -41,7 +41,7 @@ belongs_to :user
 | Column            | Type       | Options           |
 | ----------------- | ---------- | ----------------- |
 | post_code         | string     | NOT NULL          |
-| prefectures_id    | integer    | NOT NULL          |
+| prefecture_id     | integer    | NOT NULL          |
 | city              | string     | NOT NULL          |
 | address           | string     | NOT NULL          |
 | building_name     | string     |                   |
@@ -49,7 +49,7 @@ belongs_to :user
 | user              | references | foreign_key: true |
 
 ### Association
-has_oue :destination
+belongs_to :destination
 
 
 ## destinationテーブル
@@ -62,4 +62,4 @@ has_oue :destination
 ### Association
 belongs_to :user
 belongs_to :item
-belongs_to :order
+has_one :order
