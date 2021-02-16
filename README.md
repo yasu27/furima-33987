@@ -2,20 +2,21 @@
 
 ## usersテーブル
 
-| Column             | Type   | Options  |
-| ------------------ | ------ | -------- |
-| nickname           | string | NOT NULL |
-| email              | string | NOT NULL |
-| encrypted_password | string | NOT NULL |
-| first_name         | string | NOT NULL |
-| last_name          | string | NOT NULL |
-| first_name_kana    | string | NOT NULL |
-| last_name_kana     | string | NOT NULL |
-| birth              | date   | NOT NULL |
+| Column             | Type   | Options              |
+| ------------------ | ------ | -------------------- |
+| nickname           | string | NOT NULL             |
+| email              | string | NOT NULL unique: true|
+| encrypted_password | string | NOT NULL             |
+| first_name         | string | NOT NULL             |
+| last_name          | string | NOT NULL             |
+| first_name_kana    | string | NOT NULL             |
+| last_name_kana     | string | NOT NULL             |
+| birth              | date   | NOT NULL             |
 
 ### Association
 has_many :items
-has_many :purchases
+has_oue :orders
+has_oue :destinations
 
 
 ## itemsテーブル
@@ -33,14 +34,17 @@ has_many :purchases
 | user           | references | foreign_key: true |
 
 ### Association
+has_oue :orders
 belongs_to :user
+has_oue :destinations
 
-## purchasesテーブル
+
+## ordersテーブル
 
 | Column            | Type       | Options           |
 | ----------------- | ---------- | ----------------- |
 | post_code         | string     | NOT NULL          |
-| prefectures       | string     | NOT NULL          |
+| prefectures_id    | integer    | NOT NULL          |
 | city              | string     | NOT NULL          |
 | address           | string     | NOT NULL          |
 | building_name     | string     |                   |
@@ -48,4 +52,16 @@ belongs_to :user
 | user              | references | foreign_key: true |
 
 ### Association
-belongs_to :user
+belongs_to :users
+
+
+## destinationテーブル
+
+| Column | Type       | Options           |
+| ------ | ---------- | ----------------- |
+| user   | references | foreign_key: true |
+| item   | references | foreign_key: true |
+
+### Association
+belongs_to :users
+belongs_to :items
