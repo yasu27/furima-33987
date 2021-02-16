@@ -15,8 +15,8 @@
 
 ### Association
 has_many :items
+has_many :orders
 
-has_one :order
 
 ## itemsテーブル
 
@@ -33,9 +33,9 @@ has_one :order
 | user           | references | foreign_key: true |
 
 ### Association
-
 belongs_to :user
 has_one :order
+
 
 ## destinationsテーブル
 
@@ -51,8 +51,6 @@ has_one :order
 
 ### Association
 belongs_to :order
-
-
 
 
 ## orderテーブル
