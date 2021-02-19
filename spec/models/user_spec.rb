@@ -81,5 +81,72 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
+
+    it 'first_nameが漢字・ひらがな・カタカナ以外だと登録できない' do
+      @user.first_name = 'yamada'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+    end
+
+    it 'last_nameが漢字・ひらがな・カタカナ以外だと登録できない' do
+      @user.last_name = 'tarou'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name is invalid")
+    end
+
+    it 'first_name_kanaがカタカナ以外だと登録できない' do
+      @user.first_name_kana = 'yamada'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid")
+    end
+
+    it 'last_name_kanaがカタカナ以外だと登録できない' do
+      @user.last_name_kana = 'yamada'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana is invalid")
+    end
+
+    it "nicknameが登録できる" do
+      @user.nickname = 'yamada'
+      @user.valid?
+      expect(@user.errors.full_messages) 
+    end
+
+    it "emailが登録できる" do
+      @user.email = 'yamada@yamada.com'
+      @user.valid?
+      expect(@user.errors.full_messages) 
+    end
+
+    it "passwordが登録できる" do
+      @user.password = '123abc'
+      @user.valid?
+      expect(@user.errors.full_messages) 
+    end
+
+    it "first_nameが登録できる" do
+      @user.first_name = '山田'
+      @user.valid?
+      expect(@user.errors.full_messages) 
+    end
+
+    it "last_nameが登録できる" do
+      @user.last_name = '太郎'
+      @user.valid?
+      expect(@user.errors.full_messages) 
+    end
+
+    it "first_name_kanaが登録できる" do
+      @user.first_name_kana = 'ヤマダ'
+      @user.valid?
+      expect(@user.errors.full_messages) 
+    end
+
+    it "last_name_kanaが登録できる" do
+      @user.last_name_kana = 'ヤマダ'
+      @user.valid?
+      expect(@user.errors.full_messages) 
+    end
+
   end
 end
