@@ -3,22 +3,18 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
-    # インスタンスの生成
   end
 
   describe "ユーザー新規登録" do
     context '商品出品ができない時' do
       it "nicknameが空だと登録できない" do
         @user.nickname = nil
-        # user = User.new(nickname: nil)とおなじ書き方
         @user.valid?
-        # trueかfalseで返ってくる
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
 
       it "emailが空では登録できない" do
         @user.email = nil
-        # user = User.new(email: nil)
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
@@ -112,19 +108,19 @@ RSpec.describe User, type: :model do
       it "passwordが半角英語のみでは登録できない" do
         @user.password = 'abcdefg'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
 
       it "passwordが半角数字のみでは登録できない" do
         @user.password = '1234567'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
 
       it "passwordが全角では登録できない" do
         @user.password = 'ａｂｃｄｅｆｇ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
 
       it 'first_name_kanaがカタカナ以外の全角文字だと登録できない' do
