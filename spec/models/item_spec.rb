@@ -97,6 +97,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Condition must be other than 1")
       end
 
+      it "delivery_idのidに1が選択されている場合出品できない" do
+        @item.delivery_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery must be other than 1")
+      end
+
       it "prefecture_idのidに1が選択されている場合出品できない" do
         @item.prefecture_id = 1
         @item.valid?
