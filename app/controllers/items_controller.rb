@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    <#% 商品一覧機能の実装範囲 @item = Item.all >
+    @items = Item.all 
   end
 
   def new
@@ -20,6 +20,6 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:name, :description, :category_id, :condition_id, :delivery_id, :prefecture_id, :day_id, :price, :image :user_id)
+    params.require(:item).permit(:name, :description, :category_id, :condition_id, :delivery_id, :prefecture_id, :day_id, :price, :image, :user_id)
   end
 end
