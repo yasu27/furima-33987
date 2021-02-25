@@ -22,6 +22,4 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :day_id
   end
-  #1 models/item.rb ,user.rbにアソシエーションを書く（READMEを参考にしてください）
-  #2 show.html.erbに@item.ゆーざー.取り出したいカラム名
 end
