@@ -2,8 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @form_object = FactoryBot.build(:form_object)
-  end
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @form_object = FactoryBot.build(:form_object, user_id: @user.id , item_id: @item.id)
+    sleep 2
+   end
 
   describe '商品購入機能' do
     context '商品購入ができる時' do
