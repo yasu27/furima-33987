@@ -60,6 +60,24 @@ RSpec.describe Item, type: :model do
         @form_object.valid?
         expect(@form_object.errors.full_messages).to include("Token can't be blank")
       end
+
+      it "user_idが空の場合購入できない" do
+        @form_object.user_id = nil
+        @form_object.valid?
+        expect(@form_object.errors.full_messages).to include("User can't be blank")
+      end
+
+      it "item_idが空の場合購入できない" do
+        @form_object.item_id = nil
+        @form_object.valid?
+        expect(@form_object.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "prefecture_idのidに1が選択されている場合出品できない" do
+        @form_object.prefecture_id = 1
+        @form_object.valid?
+        expect(@form_object.errors.full_messages).to include("Prefecture must be other than 1")
+      end
     end
   end
 end
