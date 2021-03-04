@@ -82,7 +82,7 @@ RSpec.describe Item, type: :model do
       end
 
       it "phone_numberが12桁以上では登録できない" do
-        @form_object.phone_number = '090-1234-5678'
+        @form_object.phone_number = '090123456789'
         @form_object.valid?
         expect(@form_object.errors.full_messages).to include("Phone number is invalid")
       end
