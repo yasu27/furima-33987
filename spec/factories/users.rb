@@ -3,7 +3,8 @@ FactoryBot.define do
     # ①カラムを全て用意する
     # カラムはSQLで確認する
     nickname              {'test'}
-    email                 {'test@example'}
+    # email                 {'test@example'}
+    email                 {Faker::Internet.email}
     password              {'0abcde'}
     password_confirmation {password}
     first_name            {'田中'}
