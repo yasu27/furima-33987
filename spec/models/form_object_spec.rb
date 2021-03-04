@@ -13,6 +13,11 @@ RSpec.describe Item, type: :model do
       it '全ての値が正常に入力されていれば登録できること' do
         expect(@form_object).to be_valid
       end
+
+      it "ビルが空の場合でも購入できる" do
+        @form_object.building_name = ''
+        expect(@form_object).to be_valid
+      end
     end
 
     context '商品購入ができない時' do
@@ -38,12 +43,6 @@ RSpec.describe Item, type: :model do
         @form_object.address = nil
         @form_object.valid?
         expect(@form_object.errors.full_messages).to include("Address can't be blank")
-      end
-
-      it "phone_numberが空だと登録できない" do
-        @form_object.phone_number = nil
-        @form_object.valid?
-        expect(@form_object.errors.full_messages).to include("Phone number can't be blank")
       end
 
       it "phone_numberが空だと登録できない" do
@@ -80,6 +79,18 @@ RSpec.describe Item, type: :model do
         @form_object.prefecture_id = 1
         @form_object.valid?
         expect(@form_object.errors.full_messages).to include("Prefecture must be other than 1")
+      end
+
+      it "phone_numberが12桁以上では登録できない" do
+        @form_object.phone_number = '090-1234-5678'
+        @form_object.valid?
+        expect(@form_object.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it "phone_numberが英数混合では登録できない" do
+        @form_object.phone_number = 'abcdefghijk'
+        @form_object.valid?
+        expect(@form_object.errors.full_messages).to include("Phone number is invalid")
       end
     end
   end
